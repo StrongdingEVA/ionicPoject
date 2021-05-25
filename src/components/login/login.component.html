@@ -1,0 +1,27 @@
+<app-bar></app-bar>
+
+<ion-content>
+	<div class="login-form">
+		<form #loginForm="ngForm">
+			<ion-card>
+				<ion-item lines="none">
+					<ion-label>
+						<ion-icon name="person-circle-outline"></ion-icon>
+					</ion-label>
+					<ion-input [(ngModel)]="user.username" name="username" required tel="tel" placeholder="请输入账号">
+					</ion-input>
+				</ion-item>
+				<ion-item lines="none">
+					<ion-label>
+						<ion-icon name="bag-outline"></ion-icon>
+					</ion-label>
+					<ion-input [(ngModel)]="user.password" name="password" type="password" required placeholder="请输入密码">
+					</ion-input>
+				</ion-item>
+			</ion-card>
+			<div class="login-btn">
+				<ion-button expand="full" (click)="onLogin(loginForm)" type="submit">登录</ion-button>
+			</div>
+		</form>
+	</div>
+</ion-content>

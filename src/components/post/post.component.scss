@@ -1,0 +1,27 @@
+.post-form{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding: 5px 5px;
+}
+.post-form .post-item {
+    border-bottom: 1px solid #ccc;
+}
+.post-form .post-btn{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding-right: 10px;
+}
+.post-form .marks{
+    width: 100%;
+    min-height: 80px;
+}
+.post-form .marks .chip {
+    font-size: 12px;
+    background-color:#719be4
+}
+.post-form .marks .choose {
+    font-size: 12px;
+    background-color:#3171e0
+}

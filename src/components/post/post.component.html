@@ -1,3 +1,56 @@
+<app-bar></app-bar>
+
 <ion-content>
-  <ion-button routerLink="/app-home" roruterLinkActive="active">click here</ion-button>
+	<div class="post-form">
+		<form #postForm="ngForm">
+			<ion-card>
+				<ion-item lines="none">
+					<ion-input [(ngModel)]="postForm.title" name="title" required placeholder="请输入标题"></ion-input>
+				</ion-item>
+			</ion-card>
+			<ion-card>
+				<ion-item lines="none">
+					<div class="marks">
+						<ion-chip class="choose">
+							<ion-label color="light">Label</ion-label>
+						</ion-chip>
+						<ion-chip class="chip">
+							<ion-label color="light">Label</ion-label>
+						</ion-chip>
+						<ion-chip class="choose">
+							<ion-label color="light">Label</ion-label>
+						</ion-chip>
+						<ion-chip class="chip">
+							<ion-label color="light">Label</ion-label>
+						</ion-chip>
+						<ion-chip class="choose">
+							<ion-label color="light">Label</ion-label>
+						</ion-chip>
+						<ion-chip class="chip">
+							<ion-label color="light">Label</ion-label>
+						</ion-chip>
+						<ion-chip class="choose">
+							<ion-label color="light">Label</ion-label>
+						</ion-chip>
+					</div>
+				</ion-item>
+			</ion-card>
+
+			<ion-card>
+				<ion-item lines="none">
+					<ion-textarea auto-grow="true" inputmode="text" maxlength="500" minlength="20" rows="4" [(ngModel)]="postForm.content" name="content" required placeholder="想说的话..."></ion-textarea>
+				</ion-item>
+			</ion-card>
+
+			<ion-card>
+				<ion-item lines="none">
+					<ion-button (click)="chooseImage()">上传图片</ion-button>
+				</ion-item>
+			</ion-card>
+
+			<div class="post-btn">
+				<ion-button expand="full" (click)="onLogin(loginForm)" type="submit">登录</ion-button>
+			</div>
+		</form>
+	</div>
 </ion-content>

@@ -18,7 +18,7 @@ export class HomeComponent {
 	}
 
 	getTempData(len: number) {
-		let item = { img: 'https://ionicframework.com/docs/demos/api/list/avatar-finn.png', title: 'this is title', time: '2021/5/18 14:30', discript: 'this is content discript...' };
+		let item = { avatar: 'https://ionicframework.com/docs/demos/api/list/avatar-finn.png', img: "assets/images/111.jpg", title: 'this is title', time: '2021/5/18 14:30', discript: 'this is content discript this is content discript this is content discript this is content discript this is content discript ' };
 		for (let i = 0; i < len; i++) {
 			this.articles.push(item)
 		}
@@ -32,9 +32,9 @@ export class HomeComponent {
 	}
 
 	post() {
+		this.router.navigate(['/app-post']);return;
 		this.sessionService.checkLogin((flag) => {
-			this.router.navigate(['/app-login']);return;
-			if (flag) {
+			if (flag) { 
 				this.router.navigate(['/app-login']);
 			} else {
 				this.router.navigate(['/app-post']);

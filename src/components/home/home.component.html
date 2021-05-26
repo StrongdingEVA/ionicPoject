@@ -51,11 +51,25 @@
 			<ion-list>
 				<ion-item *ngFor="let article of articles">
 					<ion-avatar slot="start">
-						<img src="{{ article.img }}">
+						<img src="{{ article.avatar }}">
 					</ion-avatar>
 					<ion-label>
-						<h2>{{ article.title }}</h2>
-						<h3>{{ article.discript }}</h3>
+						<p [title]="article.title">
+							<ion-img src="{{ article.img }}"></ion-img>
+						</p>
+						<p class="title">{{ article.title }}</p>
+						<p class="content">{{ article.discript }}</p>
+						<p>
+							<ion-chip style="font-size: 12px;">
+								<ion-label color="secondary">Label</ion-label>
+							</ion-chip>
+							<ion-chip style="font-size: 12px;">
+								<ion-label color="secondary">Label</ion-label>
+							</ion-chip>
+							<ion-chip style="font-size: 12px;">
+								<ion-label color="secondary">Label</ion-label>
+							</ion-chip>
+						</p>
 						<p class="post-time">{{ article.time }}</p>
 					</ion-label>
 				</ion-item>

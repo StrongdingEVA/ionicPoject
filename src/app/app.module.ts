@@ -26,6 +26,7 @@ import { ClientService } from '../services/http/client.service';
 import { CookieService } from '../services/cookie/cookie.service';
 import { SessionService } from '../services/session/session.service';
 import { RouterService } from '../services/routes/router.service';
+import { LoadingService } from '../services/loading/loading.service';
 import { LocalStorageService } from '../services/localStorage/local-storage.service';
 
 
@@ -44,6 +45,7 @@ import { LocalStorageService } from '../services/localStorage/local-storage.serv
     LocalStorageService,
     SessionService,
     RouterService,
+    LoadingService,
   ],
   bootstrap: [AppComponent],
 })

@@ -13,15 +13,21 @@
     width: 100%;
     padding-right: 10px;
 }
-.post-form .marks{
+.post-form .labels{
     width: 100%;
-    min-height: 80px;
+    min-height: 40px;
 }
-.post-form .marks .chip {
+.post-form .labels .chip {
     font-size: 12px;
     background-color:#719be4
 }
-.post-form .marks .choose {
+.post-form .labels .checked {
     font-size: 12px;
     background-color:#3171e0
+}
+.post-form .upload-img-item{
+    width: 33%;
+    height: 130px;
+    margin: 20px 5px 20px 5px;
+    border: 1px solid rgb(240, 239, 239);
 }

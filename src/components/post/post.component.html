@@ -1,43 +1,57 @@
 <app-bar></app-bar>
 
 <ion-content>
+	<style>
+		:root {
+		  --ion-safe-area-top: 20px;
+		  --ion-safe-area-bottom: 22px;
+		}
+	  </style>
 	<div class="post-form">
 		<form #postForm="ngForm">
 			<ion-card>
 				<ion-item lines="none">
-					<ion-input [(ngModel)]="postData.title" name="title" #title="ngModel" required maxlength="20" placeholder="请输入标题"></ion-input>
+					<ion-input [(ngModel)]="postData.title" name="title" #title="ngModel" required maxlength="20"
+						placeholder="请输入标题"></ion-input>
 				</ion-item>
-				<div *ngIf="title.invalid && (title.dirty || title.touched)" #spy class="dhl_error">
-					<div *ngIf="title.errors.required">
+				<div *ngIf="title.invalid && (title.dirty || title.touched)" #spy>
+					<div class="error-info" *ngIf="title.errors.required">
 						{{ validate.errorMsg.title.required }}
-					 </div>
-					 <div *ngIf="title.errors.minlength">
-						{{ validate.errorMsg.title.minlength }}
-					 </div>
-					 <div *ngIf="title.errors.maxlength">
+					</div>
+					<div class="error-info" *ngIf="title.errors.maxlength">
 						{{ validate.errorMsg.title.maxlength }}
-					 </div>
-				 </div>
+					</div>
+				</div>
 			</ion-card>
 			<ion-card>
 				<ion-item lines="none">
 					<div class="labels">
-						<ion-chip *ngFor="let label of labels;let i = index" [class]="label.checked ? 'checked' : 'chip'" (click)="checkLabel(i)">
+						<ion-chip *ngFor="let label of labels;let i = index"
+							[class]="label.checked ? 'checked' : 'chip'" (click)="checkLabel(i)">
 							<ion-label color="light">{{ label.name }}</ion-label>
 						</ion-chip>
 					</div>
 				</ion-item>
 			</ion-card>
-			
+
 			<ion-card>
 				<ion-item lines="none">
-					<ion-textarea auto-grow="true" inputmode="text" rows="4" name="content" placeholder="想说的话..."></ion-textarea>
+					<ion-textarea auto-grow="true" [(ngModel)]="postData.content" #content="ngModel" required
+						maxlength="200" inputmode="text" rows="4" name="content" placeholder="想说的话..."></ion-textarea>
 				</ion-item>
+				<div *ngIf="content.invalid && (content.dirty || content.touched)" #spy>
+					<div class="error-info" *ngIf="content.errors.required">
+						{{ validate.errorMsg.content.required }}
+					</div>
+					<div class="error-info" *ngIf="content.errors.maxlength">
+						{{ validate.errorMsg.content.maxlength }}
+					</div>
+				</div>
 			</ion-card>
 
 			<ion-card>
 				<ion-item lines="none">
-					<div *ngIf="postData.imgSum < 3" (click)="chooseImage()" class="upload-img-item">
+					<div *ngIf="postData.imgSum < 3" (click)="getPhoto()" class="upload-img-item">
 						<p>这里一个icon</p>
 					</div>
 					<div *ngFor="let img of postData.imgs" class="upload-img-item">
@@ -47,7 +61,8 @@
 			</ion-card>
 
 			<div class="post-btn">
-				<ion-button expand="full" (click)="doPost(postForm)" type="submit">发布</ion-button>
+				<ion-button expand="full" [disabled]="!postForm.form.valid" (click)="doPost(postForm)" type="submit">发布
+				</ion-button>
 			</div>
 		</form>
 	</div>

@@ -32,7 +32,7 @@ export class HomeComponent {
 	}
 
 	post() {
-		this.router.navigate(['/app-post']);return;
+		this.router.navigate(['/app-login']);return;
 		this.sessionService.checkLogin((flag) => {
 			if (flag) { 
 				this.router.navigate(['/app-login']);

@@ -2,25 +2,45 @@
 
 <ion-content>
 	<div class="login-form">
-		<form #loginForm="ngForm">
+		<form #postForm="ngForm">
 			<ion-card>
 				<ion-item lines="none">
 					<ion-label>
 						<ion-icon name="person-circle-outline"></ion-icon>
 					</ion-label>
-					<ion-input [(ngModel)]="user.username" name="username" required tel="tel" placeholder="请输入账号">
-					</ion-input>
+					<ion-input [(ngModel)]="postData.username" #username="ngModel" required pattern="^1[3456789]\d{9}$"
+						name="username" placeholder="请输入账号"></ion-input>
 				</ion-item>
+				<div *ngIf="username.invalid && (username.dirty || username.touched)" #spy>
+					<div class="error-info" *ngIf="username.errors.required">
+						{{ validate.errorMsg.username.required }}
+					</div>
+					<div class="error-info" *ngIf="username.errors.pattern">
+						{{ validate.errorMsg.username.error }}
+					</div>
+				</div>
+			</ion-card>
+			<ion-card>
 				<ion-item lines="none">
 					<ion-label>
 						<ion-icon name="bag-outline"></ion-icon>
 					</ion-label>
-					<ion-input [(ngModel)]="user.password" name="password" type="password" required placeholder="请输入密码">
-					</ion-input>
+					<ion-input [(ngModel)]="postData.password" #password="ngModel" required pattern="^([a-z]|[A-Z])+\d{6,}$"
+						name="password" type="password" placeholder="请输入密码"></ion-input>
 				</ion-item>
+				<div *ngIf="password.invalid && (password.dirty || password.touched)" #spy>
+					<div class="error-info" *ngIf="password.errors.required">
+						{{ validate.errorMsg.password.required }}
+					</div>
+					<div class="error-info" *ngIf="password.errors.pattern">
+						{{ validate.errorMsg.password.error }}
+					</div>
+				</div>
 			</ion-card>
+
 			<div class="login-btn">
-				<ion-button expand="full" (click)="onLogin(loginForm)" type="submit">登录</ion-button>
+				<ion-button expand="full" [disabled]="!postForm.form.valid || inLoging" (click)="onLogin(loginForm)" type="submit">
+					{{inLoging ? '登录中' : '登 录' }}</ion-button>
 			</div>
 		</form>
 	</div>

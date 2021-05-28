@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { FileTransfer} from '@ionic-native/file-transfer/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 //components
 import { HomeComponent } from '../components/home/home.component';
@@ -27,14 +28,23 @@ import { CookieService } from '../services/cookie/cookie.service';
 import { SessionService } from '../services/session/session.service';
 import { RouterService } from '../services/routes/router.service';
 import { LoadingService } from '../services/loading/loading.service';
+import { ActionSheetService } from '../services/actionSheet/action-sheet.service';
 import { LocalStorageService } from '../services/localStorage/local-storage.service';
 
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, PostComponent, LoginComponent, BarComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+  ],
   providers: [
+    Camera,
     ImagePicker,
     FileTransfer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -46,6 +56,7 @@ import { LocalStorageService } from '../services/localStorage/local-storage.serv
     SessionService,
     RouterService,
     LoadingService,
+    ActionSheetService,
   ],
   bootstrap: [AppComponent],
 })

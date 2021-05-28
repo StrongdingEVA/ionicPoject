@@ -1,8 +1,10 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoadingService } from '../../services/loading/loading.service';
+import { ActionSheetService } from '../../services/actionSheet/action-sheet.service';
 
 @Component({
 	selector: 'app-post',
@@ -11,13 +13,58 @@ import { LoadingService } from '../../services/loading/loading.service';
 })
 export class PostComponent implements OnInit {
 	constructor(
+		private camera: Camera,
 		private imagePicker: ImagePicker,
 		private fileTransfer: FileTransfer,
 		private loading: LoadingService,
+		private actionSheet: ActionSheetService,
 	) { }
 
 	ngOnInit() {
 		this.getLabels();
+	}
+
+	getPhoto() {
+		let buttons = [
+			{
+				text: '相机',
+				handler: () => {
+					this.takePhoto();
+				}
+			},
+			{
+				text: '相册',
+				handler: () => {
+					this.chooseImage();
+				}
+			},
+			{
+				text: '取消',
+				icon: 'close',
+				role: 'cancel',
+				handler: () => {
+					console.log('Cancel clicked');
+				}
+			}
+		];
+		this.actionSheet.show('请选择', buttons);
+	}
+
+	takePhoto() {
+		const options: CameraOptions = {
+			quality: 100,
+			destinationType: this.camera.DestinationType.FILE_URI,
+			encodingType: this.camera.EncodingType.JPEG,
+			mediaType: this.camera.MediaType.PICTURE
+		}
+
+		this.camera.getPicture(options).then((imageData) => {
+			// imageData is either a base64 encoded string or a file URI
+			// If it's base64 (DATA_URL):
+			let base64Image = 'data:image/jpeg;base64,' + imageData;
+		}, (err) => {
+			// Handle error
+		});
 	}
 
 	/**
@@ -95,15 +142,22 @@ export class PostComponent implements OnInit {
 	// 		});
 	// }
 
-	public validate:any = {
+	public validate: any = {
 		errorMsg: {
-			title:{
+			title: {
 				required: '标题不能为空',
 				maxlength: '标题长度不能超过20'
+			},
+			content: {
+				required: '内容不能为空',
+				maxlength: '内容长度不能超过200'
 			}
 		}
 	}
 
+	public currentImage: any = true;//点击之后影藏当前的图片，显示loading
+	public ImageScale: any;//后台返回的缩略图
+	public uploadLinFail: false;//loading默认false，执行上传过程中的加载动画
 	public postForm;
 	public labels = [];
 	public postData = {
